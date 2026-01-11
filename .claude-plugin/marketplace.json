@@ -15,10 +15,8 @@
         "name": "Ahmed Mulla",
         "email": "mulla.ahmed20@gmail.com"
       },
-      "source": {
-        "name": "skill-generator",
-        "source": "./"
-      },
+        "source": "./plugins/skill-generator",
+     
       "keywords": [
         "github",
         "skills",
