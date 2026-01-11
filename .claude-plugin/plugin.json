@@ -1,0 +1,17 @@
+{
+  "name": "skill-generator",
+  "version": "1.0.0",
+  "description": "Convert public GitHub repositories into Claude skills compatible with the Anthropic skills ecosystem",
+  "author": {
+    "name": "Ahmed Mulla",
+    "email": "mulla.ahmed20@gmail.com"
+  },
+  "keywords": [
+    "github",
+    "skills",
+    "automation",
+    "code-generation",
+    "anthropic"
+  ],
+  "license": "MIT"
+}
