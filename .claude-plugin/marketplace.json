@@ -1,0 +1,32 @@
+{
+  "name": "skill-generator-marketplace",
+  "version": "1.0.0",
+  "description": "Claude Code plugins by Ahmed Mulla",
+  "owner": {
+    "name": "Ahmed Mulla",
+    "email": "mulla.ahmed20@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "skill-generator",
+      "version": "1.0.0",
+      "description": "Convert public GitHub repositories into Claude skills compatible with the Anthropic skills ecosystem",
+      "author": {
+        "name": "Ahmed Mulla",
+        "email": "mulla.ahmed20@gmail.com"
+      },
+      "source": {
+        "name": "skill-generator",
+        "source": "./"
+      },
+      "keywords": [
+        "github",
+        "skills",
+        "automation",
+        "code-generation",
+        "anthropic"
+      ],
+      "license": "MIT"
+    }
+  ]
+}

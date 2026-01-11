@@ -1,6 +1,29 @@
 # Skill Generator Plugin
 
-Convert public GitHub repositories into Claude skills compatible with the Anthropic skills ecosystem.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
+[![Claude Code](https://img.shields.io/badge/Claude-Code-blueviolet.svg)](https://claude.ai)
+
+> Convert public GitHub repositories into Claude skills compatible with the Anthropic skills ecosystem.
+
+Transform any GitHub library or tool into a ready-to-use Claude skill with automated documentation ingestion, API analysis, and skill generation.
+
+## Table of Contents
+
+- [Features](#features)
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [Usage](#usage)
+- [Pipeline Steps](#pipeline-steps)
+- [Configuration](#configuration)
+- [Components](#components)
+- [Output Format](#output-format)
+- [Packaging Skills](#packaging-skills)
+- [Requirements](#requirements)
+- [Troubleshooting](#troubleshooting)
+- [Examples](#examples)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Features
 
@@ -15,6 +38,32 @@ Convert public GitHub repositories into Claude skills compatible with the Anthro
 - **Optional Packaging**: Create a `.skill` file on request
 
 ## Installation
+
+### From Marketplace (Recommended)
+
+```bash
+# Step 1: Add the marketplace
+/plugin marketplace add MullaAhmed/claude-skill-generator
+
+# Step 2: Install the skill-generator plugin
+/plugin install skill-generator@skill-generator-marketplace 
+```
+
+Alternatively, install directly from the marketplace URL:
+```bash
+/plugin marketplace add https://raw.githubusercontent.com/MullaAhmed/claude-skill-generator/main/.claude-plugin/marketplace.json
+```
+
+### From GitHub 
+
+```bash
+# Clone and install globally
+git clone https://github.com/MullaAhmed/claude-skill-generator.git
+cp -r claude-skill-generator ~/.claude/plugins/skill-generator
+
+# Or install to current project
+cp -r claude-skill-generator .claude/plugins/skill-generator
+```
 
 ### From Plugin Directory
 
@@ -31,6 +80,19 @@ cp -r skill-generator ~/.claude/plugins/
 # Or copy to project plugins
 cp -r skill-generator .claude/plugins/
 ```
+
+## Quick Start
+
+```bash
+# 1. Install the plugin (choose one method above)
+
+# 2. Generate a skill from any GitHub repo
+/create-skill https://github.com/juliangarnier/anime
+
+# 3. Find your generated skill in ./skills/anime-js/
+```
+
+That's it! The plugin handles URL parsing, documentation fetching, API analysis, and skill generation automatically.
 
 ## Usage
 
@@ -278,10 +340,20 @@ Contributions welcome! Key areas:
 
 ## License
 
-MIT
+MIT License - see [LICENSE](LICENSE) for details.
 
 ## Credits
 
-- [Anthropic Skills Ecosystem](https://github.com/anthropics/skills)
-- [Codewiki](https://codewiki.google) for documentation
-- [Firecrawl](https://firecrawl.dev) for optional enhanced scraping
+Built with:
+- [Anthropic Claude](https://anthropic.com) - AI backbone
+- [Anthropic Skills Ecosystem](https://github.com/anthropics/skills) - Skills format and conventions
+- [Codewiki](https://codewiki.google) - Documentation source
+- [Firecrawl](https://firecrawl.dev) - Optional enhanced web scraping
+
+## Author
+
+**Ahmed Mulla** - [GitHub](https://github.com/MullaAhmed)
+
+---
+
+<p align="center">Made with Claude Code</p>
