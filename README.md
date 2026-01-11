@@ -43,7 +43,7 @@ Transform any GitHub library or tool into a ready-to-use Claude skill with autom
 
 ```bash
 # Step 1: Add the marketplace
-/plugin marketplace add MullaAhmed/claude-skill-generator
+/plugin marketplace add MullaAhmed/skill-generator-marketplace
 
 # Step 2: Install the skill-generator plugin
 /plugin install skill-generator@skill-generator-marketplace 
@@ -51,18 +51,18 @@ Transform any GitHub library or tool into a ready-to-use Claude skill with autom
 
 Alternatively, install directly from the marketplace URL:
 ```bash
-/plugin marketplace add https://raw.githubusercontent.com/MullaAhmed/claude-skill-generator/main/.claude-plugin/marketplace.json
+/plugin marketplace add https://raw.githubusercontent.com/MullaAhmed/skill-generator-marketplace/main/.claude-plugin/marketplace.json
 ```
 
 ### From GitHub 
 
 ```bash
 # Clone and install globally
-git clone https://github.com/MullaAhmed/claude-skill-generator.git
-cp -r claude-skill-generator ~/.claude/plugins/skill-generator
+git clone https://github.com/MullaAhmed/skill-generator-marketplace.git
+cp -r skill-generator-marketplace ~/.claude/plugins/skill-generator
 
 # Or install to current project
-cp -r claude-skill-generator .claude/plugins/skill-generator
+cp -r skill-generator-marketplace .claude/plugins/skill-generator
 ```
 
 ### From Plugin Directory
