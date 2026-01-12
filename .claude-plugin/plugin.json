@@ -11,7 +11,16 @@
     "skills",
     "automation",
     "code-generation",
-    "anthropic"
+    "anthropic",
+    "create skill",
+    "generate skill",
+    "skill generator",
+    "github to skill",
+    "convert repository",
+    "make skill",
+    "skill from repo",
+    "turn into skill",
+    "package skill"
   ],
   "license": "MIT"
 }

@@ -1,7 +1,13 @@
 ---
 name: create-skill
-description: Convert a public GitHub repository into a Claude skill compatible with the Anthropic skills ecosystem
-argument-hint: "<github_url> [--name <skill-name>] [--output <path>] [--package [<path>]]"
+description: |
+  MANDATORY skill generator - converts GitHub repositories to Claude skills compatible with Anthropic ecosystem.
+
+  ACTIVATE when user says: "create skill", "generate skill from [repo]", "make a skill for [url]",
+  "convert [repo] to skill", "skill for [library]", or provides GitHub URLs with skill creation intent.
+
+  Supports single or multiple repository URLs for parallel processing via sub-agents.
+argument-hint: "<github_url> [github_url2 ...] [--name <skill-name>] [--output <path>] [--package [<path>]]"
 allowed-tools:
   - Bash
   - Read
@@ -17,17 +23,73 @@ allowed-tools:
 
 # Create Skill from GitHub Repository
 
-Convert a public GitHub repository into a ready-to-commit Claude skill following Anthropic skills ecosystem conventions.
+Convert public GitHub repositories into ready-to-commit Claude skills following Anthropic skills ecosystem conventions. When multiple URLs are provided, spawn parallel sub-agents for concurrent processing.
 
 ## Argument Parsing
 
 Parse the provided arguments:
-- **Required**: `<github_url>` - GitHub repository URL (e.g., `https://github.com/juliangarnier/anime`)
-- **Optional**: `--name <skill-name>` - Override the generated skill name
+- **Required**: `<github_url>` - One or more GitHub repository URLs
+  - Multiple URLs can be provided, separated by spaces
+  - Example: `/create-skill https://github.com/axios/axios https://github.com/lodash/lodash`
+- **Optional**: `--name <skill-name>` - Override the generated skill name (only for single URL)
 - **Optional**: `--output <path>` - Output directory (default: `.claude/skills/`)
-- **Optional**: `--package [<path>]` - Package into a `.skill` file after generation (optional output directory)
+- **Optional**: `--package [<path>]` - Package into a `.skill` file after generation
 
 If no URL is provided, prompt the user for one.
+
+## Multi-URL Detection and Parallel Processing
+
+**CRITICAL**: Before proceeding with the standard pipeline, detect if multiple GitHub URLs are provided.
+
+### Step 0: Detect Multiple URLs
+
+1. Parse arguments and extract all GitHub URLs matching patterns:
+   - `https://github.com/owner/repo`
+   - `github.com/owner/repo`
+   - `http://github.com/owner/repo`
+
+2. Count valid URLs found
+
+### Parallel Sub-Agent Spawning (2+ URLs)
+
+If **2 or more URLs** are detected:
+
+1. **Do NOT proceed with the single-skill pipeline below**
+2. **Spawn parallel sub-agents using the Task tool**
+
+For each URL, use the Task tool with these parameters:
+- `subagent_type`: `"skill-generator:skill-generator-worker"`
+- `description`: `"Generate skill from {repo_name}"`
+- `prompt`: A detailed prompt containing the github_url, output directory, package options, and any API keys from config
+
+**IMPORTANT**: Call ALL Task tools in a SINGLE message to enable parallel execution.
+
+Example prompt for each sub-agent:
+```
+Generate a Claude skill from the GitHub repository: {github_url}
+
+Configuration:
+- Output directory: {output_path or ".claude/skills/"}
+- Package skill: {true/false}
+- Firecrawl API key: {key or "not configured"}
+- GitHub token: {token or "not configured"}
+
+Follow the skill-generator-worker pipeline and return the results.
+```
+
+After all sub-agents complete, aggregate and report:
+- Summary of all skills created
+- Any failures with resolution steps
+- File tree for each skill
+- Verification instructions
+
+**STOP HERE if multiple URLs detected** - do not continue to the single-skill pipeline below.
+
+---
+
+## Single-Skill Pipeline (1 URL)
+
+The following steps apply only when a single GitHub URL is provided.
 
 ## Configuration Check (API Keys)
 
