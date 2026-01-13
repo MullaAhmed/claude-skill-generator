@@ -43,6 +43,7 @@ description: Skill description with trigger phrases
 ```
 
 Default to only `name` and `description`. Only include optional fields if the user explicitly requests them or the target platform requires them.
+The `description` is the primary trigger mechanism, so include "when to use" details here instead of relying on body sections.
 
 ### Field Constraints
 
@@ -76,6 +77,7 @@ tags:
 ```
 
 Avoid adding optional fields by default; most generated skills should include only `name` and `description`.
+If a license needs to be captured, prefer referencing it in the body or resources unless the user explicitly requests a frontmatter field.
 
 ## Skill Categories
 
@@ -114,14 +116,11 @@ You can call the animate() function.
 
 {Overview paragraph}
 
-## When to Use This Skill
-{Bullet list of use cases}
-
 ## Quick Start
 {Minimal working example}
 
-## Core Concepts
-{Key concepts and terminology}
+## Core Workflows or Tasks
+{Step-by-step guidance or task recipes}
 
 ## Examples
 {Multiple working examples}
@@ -129,12 +128,17 @@ You can call the animate() function.
 ## Limitations
 {Known limitations and caveats}
 
+## Companion Skills (optional)
+{1-3 related skills from the Anthropic skills ecosystem and why they help}
+
 ## Additional Resources
 {Links to references/ and examples/}
 ```
 
+Choose sections that fit the task. "When to Use This Skill" can be included for readability, but it does not drive triggering.
+
 ### Length Guidelines
-- **Target**: 1,500-2,000 words
+- **Target**: Keep SKILL.md concise and task-focused (often 300-1200 words)
 - **Maximum**: 5,000 words
 - **If longer**: Move detailed content to `references/`
 
@@ -196,7 +200,7 @@ Avoid these patterns:
 - No trigger phrases in description
 - Very short body (<100 words)
 - Very long body (>5000 words)
-- Missing Examples section
+- Missing examples or task guidance
 - Unreferenced files in directories
 
 ## Best Practices
@@ -237,17 +241,20 @@ Keep SKILL.md focused; move details to references/:
 
 ```
 skill-name/
-├── SKILL.md                    # Core concepts, quick start (~2000 words)
+├── SKILL.md                    # Core concepts, quick start
 └── references/
-    ├── api-reference.md        # Detailed API docs (~3000 words)
-    ├── advanced-patterns.md    # Complex use cases (~2500 words)
-    └── troubleshooting.md      # Common issues (~1500 words)
+    ├── api-reference.md        # Detailed API docs
+    ├── advanced-patterns.md    # Complex use cases
+    └── troubleshooting.md      # Common issues
 ```
 
 Additional guardrails:
 - Avoid deep reference chains (link only one level from SKILL.md)
 - Add a table of contents to reference files longer than 100 lines
 - If a reference file exceeds ~10k words, include grep search patterns
+
+### Avoid Extra Files
+Do not add README, changelogs, or setup guides. Only include files that help Claude execute the task.
 
 ### Resource References
 Clearly reference supporting files in SKILL.md:
@@ -288,9 +295,10 @@ Before publishing a skill:
 - [ ] Frontmatter uses only `name` and `description` unless explicitly requested
 - [ ] Description includes trigger phrases
 - [ ] Body uses imperative form (not "you should")
-- [ ] Body is appropriately sized (1500-5000 words)
+- [ ] Body is concise and task-focused
 - [ ] References have TOC if long and avoid deep reference chains
-- [ ] At least 3 working examples included
+- [ ] Examples or task steps included where applicable
+- [ ] Companion skills listed when clearly relevant
 - [ ] All referenced files exist
 - [ ] No sensitive data included
 - [ ] Code examples are syntactically correct

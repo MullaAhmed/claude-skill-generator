@@ -242,9 +242,22 @@ def validate_body(body: str) -> list[ValidationIssue]:
     elif word_count > 5000:
         issues.append(ValidationIssue("warning", "body", f"Skill body is very long ({word_count} words) - consider moving details to references/"))
 
-    # Check for examples section
-    if "## example" not in body.lower() and "### example" not in body.lower():
-        issues.append(ValidationIssue("warning", "body", "No Examples section found - consider adding usage examples"))
+    # Check for examples or task/workflow guidance
+    body_lower = body.lower()
+    example_markers = [
+        "## example",
+        "### example",
+        "example:",
+        "examples",
+        "core tasks",
+        "workflow"
+    ]
+    if not any(marker in body_lower for marker in example_markers):
+        issues.append(ValidationIssue(
+            "warning",
+            "body",
+            "No examples or task/workflow guidance found - consider adding short examples or task steps"
+        ))
 
     return issues
 

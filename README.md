@@ -130,7 +130,7 @@ generate a Claude skill from the axios GitHub repo
 5. **Target Task Collection**: Ask for example tasks when docs are thin
 6. **Web Search Enrichment**: Find tutorials, examples, limitations
 7. **Repository Analysis**: Understand APIs and use cases
-8. **Skills Ecosystem Check**: Verify no duplicates
+8. **Skills Ecosystem Check**: Verify no duplicates, identify companion skills
 9. **Structure Selection**: Choose workflow/task/reference/capabilities layout
 10. **Skill Generation**: Create SKILL.md and supporting files
 11. **Validation**: Verify against Anthropic conventions
@@ -241,21 +241,20 @@ description: Comprehensive description with trigger phrases...
 
 # Skill Title
 
-## When to Use This Skill
-...
-
-## Installation
-...
-
 ## Quick Start
 ...
 
-## Examples
+## Core Tasks
 ...
 
-## Limitations
+## Pitfalls and Limits
+...
+
+## Resources
 ...
 ```
+
+Structure varies by repo type; the description carries the "when to use" triggers.
 
 ## Packaging Skills
 

@@ -87,7 +87,7 @@ For skills that produce complex output, include a checklist:
 Verify:
 - [ ] All code examples are syntactically correct
 - [ ] Installation instructions are complete
-- [ ] At least 3 working examples included
+- [ ] Examples or task steps included where applicable
 - [ ] Limitations are documented honestly
 - [ ] External links are valid
 ```

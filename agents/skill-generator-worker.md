@@ -105,6 +105,10 @@ If `firecrawl_api_key` was provided in config:
 python ${CLAUDE_PLUGIN_ROOT}/scripts/firecrawl_utils.py scrape "<codewiki_url>" --max-chars 200000 --output ".claude/tmp/firecrawl/{owner}-{repo}.md"
 ```
 
+#### Also fetch official docs if available
+
+If GitHub metadata includes a `homepage` URL or the README links to official docs, fetch those pages too. Prefer official docs over mirrors for API signatures, examples, and usage notes.
+
 ### Step 4: Web Search Enrichment
 
 Run these searches:
@@ -120,6 +124,16 @@ Create a technical summary:
 - Key exports (functions, classes, components)
 - Dependencies and requirements
 - Platform support
+
+### Step 5.5: Classify Skill Type and Companion Skills
+
+Determine what kind of skill this is (library, CLI tool, framework, spec, UI component set, integration, etc.). Use that classification to pick any companion skills that would materially help the user.
+
+Rules:
+- Only add companion skills if there is a clear, practical benefit.
+- Limit to 1-3 companion skills.
+- Use skill names from the Anthropic skills ecosystem (e.g., `frontend-design`, `web-artifacts-builder`, `webapp-testing`, `mcp-builder`, `docx`, `pdf`, `pptx`, `xlsx`, `brand-guidelines`, `theme-factory`, `internal-comms`, `slack-gif-creator`, `algorithmic-art`).
+- If no companion skills are relevant, omit the section.
 
 ### Step 6: Select Skill Structure
 
@@ -155,18 +169,14 @@ description: {Comprehensive description with trigger phrases. Max 1024 chars.}
 ---
 ```
 
-**Body sections:**
-1. Overview paragraph
-2. When to Use This Skill
-3. Installation
-4. Quick Start
-5. Core API Reference
-6. Examples (at least 3)
-7. Configuration Options
-8. Safety and Limitations
-9. How It Works
-10. Required Tools and Permissions
-11. Additional Resources
+**Body structure:**
+Select a structure that matches the repo (task-based, workflow-based, reference/guidelines, or capabilities-based). Do not force a fixed section list. For libraries, prefer a task-based layout with:
+- Quick Start (install + minimal example)
+- Core Tasks (2-5 task recipes with short examples)
+- API Cheat Sheet (optional, only most-used APIs)
+- Pitfalls and Limits
+- Companion Skills (optional, 1-3 relevant skills with reasons)
+- Resources (official docs, repo, license)
 
 **Writing style:**
 - Imperative form
@@ -233,8 +243,10 @@ Or on failure:
 
 Every generated skill must:
 - Have valid name (kebab-case, max 64 chars)
-- Have comprehensive description with triggers
-- Include at least 3 working examples
-- Document installation clearly
+- Have comprehensive description with triggers and "when to use" details
+- Use only `name` and `description` in frontmatter unless explicitly requested
+- Include 2-5 core tasks or workflow steps with short examples when applicable
+- Document installation or setup clearly when required
 - List limitations honestly
+- List companion skills when clearly relevant
 - Pass validation without errors

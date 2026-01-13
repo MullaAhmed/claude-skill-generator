@@ -194,6 +194,10 @@ Parse the JSON output:
 
 This provides better extraction than WebFetch for complex documentation sites.
 
+#### Also fetch official docs if available
+
+If GitHub metadata includes a `homepage` URL or the README links to official docs, fetch those pages too. Prefer official docs over mirrors for API signatures, examples, and usage notes.
+
 ### Step 3: Collect Target Tasks (if needed)
 
 If documentation is sparse or the repo purpose is ambiguous, ask for 2-3 concrete tasks and example user prompts. Use AskUserQuestion:
@@ -225,6 +229,16 @@ Synthesize documentation into a technical understanding:
 - Installation requirements
 - Platform support
 - Common pitfalls
+
+### Step 5.5: Classify Skill Type and Companion Skills
+
+Determine what kind of skill this is (library, CLI tool, framework, spec, UI component set, integration, etc.). Use that classification to pick any companion skills that would materially help the user.
+
+Rules:
+- Only add companion skills if there is a clear, practical benefit.
+- Limit to 1-3 companion skills.
+- Use skill names from the Anthropic skills ecosystem (e.g., `frontend-design`, `web-artifacts-builder`, `webapp-testing`, `mcp-builder`, `docx`, `pdf`, `pptx`, `xlsx`, `brand-guidelines`, `theme-factory`, `internal-comms`, `slack-gif-creator`, `algorithmic-art`).
+- If no companion skills are relevant, omit the section.
 
 ### Step 6: Check Skills Ecosystem
 
@@ -268,8 +282,9 @@ Generate the skill following these requirements:
 - YAML frontmatter with `name` and `description` only (add other fields only if explicitly requested)
 - `name`: max 64 chars, lowercase + hyphens only, no "anthropic"/"claude"
 - `description`: max 1024 chars, include trigger phrases and "when to use" details
-- Body: 1,500-3,000 words, imperative form
-- Sections: When to Use, Installation, Quick Start, Examples (3+), Limitations
+- Body: concise and task-focused, imperative form
+- Use a structure that matches the repo (task-based, workflow-based, reference/guidelines, or capabilities-based)
+- Add a Companion Skills section only when relevant (1-3 skills, with reasons)
 - Progressive disclosure:
   - Keep SKILL.md under ~500 lines; move details to `references/`
   - Avoid deep reference chains (link only one level from SKILL.md)
@@ -338,7 +353,7 @@ Common errors:
 ## Tips
 
 - For large repositories, focus on the most commonly used APIs
-- Include at least 3 working examples in the generated skill
+- Include 2-5 task examples or workflow steps with short, working snippets when applicable
 - Test code examples for syntax correctness
 - Add `scripts/` or `assets/` when the repo includes repeatable transforms or templates
 - Cite sources in your reasoning but not in the skill files

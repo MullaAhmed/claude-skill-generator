@@ -108,6 +108,13 @@ If Firecrawl MCP server is available, use it for more comprehensive scraping:
 firecrawl_scrape URL: https://codewiki.google/github.com/{owner}/{repo}
 ```
 
+#### Also fetch official docs if available
+
+If the GitHub metadata includes a `homepage` or the README links to official documentation, fetch those pages too:
+- Prefer the official docs site over mirrors
+- Extract API signatures, examples, and usage notes
+- Keep the official docs URL for the Resources section
+
 ### Step 5: Collect Target Tasks (if needed)
 
 If documentation is sparse or the repo purpose is ambiguous, ask for 2-3 concrete tasks and example user prompts. Use the answers to:
@@ -147,6 +154,7 @@ Synthesize collected information into a technical understanding:
 - **Platforms**: [Supported environments]
 - **Dependencies**: [Required packages]
 - **Inputs/Outputs**: [What it accepts and returns]
+- **Common Pitfalls**: [Known gotchas or constraints]
 
 ## Minimal Working Example
 [Show import + basic usage]
@@ -163,6 +171,16 @@ Synthesize collected information into a technical understanding:
 ## Minimal Working Example
 [Show installation + basic command]
 ```
+
+### Step 7.5: Classify Skill Type and Companion Skills
+
+Determine what kind of skill this is (library, CLI tool, framework, spec, UI component set, integration, etc.). Use that classification to pick any companion skills that would materially help the user.
+
+Rules:
+- Only add companion skills if there is a clear, practical benefit.
+- Limit to 1-3 companion skills.
+- Use skill names from the Anthropic skills ecosystem (e.g., `frontend-design`, `web-artifacts-builder`, `webapp-testing`, `mcp-builder`, `docx`, `pdf`, `pptx`, `xlsx`, `brand-guidelines`, `theme-factory`, `internal-comms`, `slack-gif-creator`, `algorithmic-art`).
+- If no companion skills are relevant, omit the section.
 
 ### Step 8: Skills Ecosystem Analysis
 
@@ -209,6 +227,8 @@ Include `scripts/` or `assets/` only when docs or user-provided inputs provide r
 - Name: lowercase letters, numbers, hyphens only
 - No reserved words: "anthropic", "claude"
 - No XML tags in name or description
+- Keep SKILL.md concise and task-focused; do not rely on a "When to Use" section for triggering
+- Add a Companion Skills section only when relevant (1-3 skills, with reasons)
 - Progressive disclosure:
   - Keep SKILL.md under ~500 lines; move details to `references/`
   - Avoid deep reference chains (link only one level from SKILL.md)

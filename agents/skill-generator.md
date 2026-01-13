@@ -230,6 +230,10 @@ Parse the JSON output:
 
 This provides better extraction than WebFetch for complex documentation sites.
 
+#### Also fetch official docs if available
+
+If GitHub metadata includes a `homepage` URL or the README links to official docs, fetch those pages too. Prefer official docs over mirrors for API signatures, examples, and usage notes. Keep the official docs URL for the Resources section.
+
 ### Step 4: Collect Target Tasks (if needed)
 
 If documentation is sparse or the repo purpose is ambiguous, ask for 2-3 concrete tasks and example user prompts. Use AskUserQuestion:
@@ -282,6 +286,16 @@ Create a technical summary:
 - Project structure
 - Key APIs
 - Plugin/extension system
+
+### Step 6.5: Classify Skill Type and Companion Skills
+
+Determine what kind of skill this is (library, CLI tool, framework, spec, UI component set, integration, etc.). Use that classification to pick any companion skills that would materially help the user.
+
+Rules:
+- Only add companion skills if there is a clear, practical benefit.
+- Limit to 1-3 companion skills.
+- Use skill names from the Anthropic skills ecosystem (e.g., `frontend-design`, `web-artifacts-builder`, `webapp-testing`, `mcp-builder`, `docx`, `pdf`, `pptx`, `xlsx`, `brand-guidelines`, `theme-factory`, `internal-comms`, `slack-gif-creator`, `algorithmic-art`).
+- If no companion skills are relevant, omit the section.
 
 ### Step 7: Check Anthropic Skills Ecosystem
 
@@ -340,21 +354,14 @@ Only include `name` and `description` unless the user explicitly requests additi
 - 4-6 specific trigger phrases users would say
 - When to use this skill, using the target tasks from Step 4 if provided
 
-**Body sections (in order):**
-1. Overview paragraph
-2. When to Use This Skill (bullet list)
-3. Installation (multiple methods)
-4. Quick Start (basic example)
-5. Core API Reference (main functions)
-6. Examples (at least 3)
-   - Basic usage
-   - Real-world workflow
-   - Error handling/edge case
-7. Configuration Options (if applicable)
-8. Safety and Limitations
-9. How It Works (brief)
-10. Required Tools and Permissions
-11. Additional Resources (links)
+**Body structure:**
+Select a structure that matches the repo (task-based, workflow-based, reference/guidelines, or capabilities-based). Do not force a fixed section list. For libraries, prefer a task-based layout with:
+- Quick Start (install + minimal example)
+- Core Tasks (2-5 task recipes with short examples)
+- API Cheat Sheet (optional, only most-used APIs)
+- Pitfalls and Limits
+- Companion Skills (optional, 1-3 relevant skills with reasons)
+- Resources (official docs, repo, license)
 
 **Writing style:**
 - Imperative form ("Install the package", not "You should install")
@@ -482,11 +489,12 @@ For any failure, report:
 
 Every generated skill must:
 - [ ] Have valid name (kebab-case, max 64 chars)
-- [ ] Have comprehensive description with triggers
+- [ ] Have comprehensive description with triggers and "when to use" details
 - [ ] Use only `name` and `description` in frontmatter unless explicitly requested
-- [ ] Include at least 3 working examples
-- [ ] Document installation clearly
+- [ ] Include 2-5 core tasks or workflow steps with short examples when applicable
+- [ ] Document installation or setup clearly when required
 - [ ] List limitations honestly
+- [ ] List companion skills when clearly relevant
 - [ ] Follow progressive disclosure (SKILL.md under ~500 lines, refs have TOC if long)
 - [ ] Pass validation without errors
 - [ ] Be immediately usable

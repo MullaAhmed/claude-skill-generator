@@ -7,7 +7,7 @@ __pycache__/
 env/
 venv/
 .venv/
-
+.tmp/
 # Local configuration (in user's project, not here)
 # Users should add .claude/config.json to their project's .gitignore
 
